@@ -2,7 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 
-const {User} = require('./models');
+const {
+  User
+} = require('./models');
 
 const router = express.Router();
 
@@ -82,20 +84,26 @@ router.post('/', jsonParser, (req, res) => {
       code: 422,
       reason: 'ValidationError',
       message: tooSmallField ?
-        `Must be at least ${sizedFields[tooSmallField].min} characters long` :
-        `Must be at most ${sizedFields[tooLargeField].max} characters long`,
+        `Must be at least ${sizedFields[tooSmallField].min} characters long` : `Must be at most ${sizedFields[tooLargeField].max} characters long`,
       location: tooSmallField || tooLargeField
     });
   }
 
-  let {username, password, firstName='', lastName=''} = req.body;
+  let {
+    username,
+    password,
+    firstName = '',
+    lastName = ''
+  } = req.body;
   // Username and password come in pre-trimmed, otherwise we throw an error
   // before this
   firstName = firstName.trim();
   lastName = lastName.trim();
 
   return User
-    .find({username})
+    .find({
+      username
+    })
     .count()
     .then(count => {
       if (count > 0) {
@@ -128,7 +136,10 @@ router.post('/', jsonParser, (req, res) => {
       if (err.reason === 'ValidationError') {
         return res.status(err.code).json(err);
       }
-      res.status(500).json({code: 500, message: 'Internal server error'});
+      res.status(500).json({
+        code: 500,
+        message: 'Internal server error'
+      });
     });
 });
 
@@ -136,11 +147,15 @@ router.post('/', jsonParser, (req, res) => {
 // we're just doing this so we have a quick way to see
 // if we're creating users. keep in mind, you can also
 // verify this in the Mongo shell.
-router.get('/', (req, res) => {
+router.get('/verify', (req, res) => {
   return User
     .find()
     .then(users => res.json(users.map(user => user.apiRepr())))
-    .catch(err => res.status(500).json({message: 'Internal server error'}));
+    .catch(err => res.status(500).json({
+      message: 'Internal server error'
+    }));
 });
 
-module.exports = {router};
+module.exports = {
+  router
+};

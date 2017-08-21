@@ -2,9 +2,10 @@ const {
     CV_APIKEY
 } = require('../config');
 
+const filter = ''; //will get from clientside input. 
 $.ajax({
     type: "GET",
-    url: "http://comicvine.gamespot.com/api/characters/?api_key=" + cvk + "&format=json&filter=" + filter,
+    url: "http://comicvine.gamespot.com/api/characters/?api_key=" + CV_APIKEY + "&format=json&filter=" + filter,
     async: true,
     dataType: "json",
     success: function (json) {

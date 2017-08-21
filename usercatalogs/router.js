@@ -3,14 +3,14 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 
 const {
-  User
+  issue
 } = require('./models');
 
 const router = express.Router();
 
 const jsonParser = bodyParser.json();
 
-// Post to register a new user
+// Post to register a new in the catalog
 router.post('/', jsonParser, (req, res) => {
   const requiredFields = ['title', 'issue'];
   const missingField = requiredFields.find(field => !(field in req.body));
@@ -24,7 +24,7 @@ router.post('/', jsonParser, (req, res) => {
     });
   }
 
-  const stringFields = ['title', 'issue', 'publisher', 'published'];
+  const stringFields = ['title', 'publisher', 'published'];
   const nonStringField = stringFields.find(field =>
     (field in req.body) && typeof req.body[field] !== 'string'
   );
@@ -35,27 +35,6 @@ router.post('/', jsonParser, (req, res) => {
       reason: 'ValidationError',
       message: 'Incorrect field type: expected string',
       location: nonStringField
-    });
-  }
-
-  // If the username and password aren't trimmed we give an error.  Users might
-  // expect that these will work without trimming (i.e. they want the password
-  // "foobar ", including the space at the end).  We need to reject such values
-  // explicitly so the users know what's happening, rather than silently
-  // trimming them and expecting the user to understand.
-  // We'll silently trim the other fields, because they aren't credentials used
-  // to log in, so it's less of a problem.
-  const explicityTrimmedFields = ['username', 'password'];
-  const nonTrimmedField = explicityTrimmedFields.find(field =>
-    req.body[field].trim() !== req.body[field]
-  );
-
-  if (nonTrimmedField) {
-    return res.status(422).json({
-      code: 422,
-      reason: 'ValidationError',
-      message: 'Cannot start or end with whitespace',
-      location: nonTrimmedField
     });
   }
 
@@ -140,20 +119,6 @@ router.post('/', jsonParser, (req, res) => {
       });
     });
 });
-
-// Never expose all your users like below in a prod application
-// we're just doing this so we have a quick way to see
-// if we're creating users. keep in mind, you can also
-// verify this in the Mongo shell.
-router.get('/', (req, res) => {
-  return User
-    .find()
-    .then(users => res.json(users.map(user => user.apiRepr())))
-    .catch(err => res.status(500).json({
-      message: 'Internal server error'
-    }));
-});
-
 module.exports = {
   router
 };

@@ -5,12 +5,21 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const passport = require('passport');
 
-const {router: usersRouter} = require('./users');
-const {router: authRouter, basicStrategy, jwtStrategy} = require('./auth');
+const {
+  router: usersRouter
+} = require('./users');
+const {
+  router: authRouter,
+  basicStrategy,
+  jwtStrategy
+} = require('./auth');
 
 mongoose.Promise = global.Promise;
 
-const {PORT, DATABASE_URL} = require('./config');
+const {
+  PORT,
+  DATABASE_URL
+} = require('./config');
 
 const app = express();
 
@@ -37,16 +46,20 @@ app.use('/api/auth/', authRouter);
 
 // A protected endpoint which needs a valid JWT to access it
 app.get('/api/protected',
-    passport.authenticate('jwt', {session: false}),
-    (req, res) => {
-        return res.json({
-            data: 'rosebud'
-        });
-    }
+  passport.authenticate('jwt', {
+    session: false
+  }),
+  (req, res) => {
+    return res.json({
+      data: 'user issues obj' // replace with user values for input into CV_API on search.jsks
+    });
+  }
 );
 
 app.use('*', (req, res) => {
-  return res.status(404).json({message: 'Not Found'});
+  return res.status(404).json({
+    message: 'Not Found'
+  });
 });
 
 // Referenced by both runServer and closeServer. closeServer
@@ -60,28 +73,28 @@ function runServer() {
         return reject(err);
       }
       server = app.listen(PORT, () => {
-        console.log(`Your app is listening on port ${PORT}`);
-        resolve();
-      })
-      .on('error', err => {
-        mongoose.disconnect();
-        reject(err);
-      });
+          console.log(`Your app is listening on port ${PORT}`);
+          resolve();
+        })
+        .on('error', err => {
+          mongoose.disconnect();
+          reject(err);
+        });
     });
   });
 }
 
 function closeServer() {
   return mongoose.disconnect().then(() => {
-     return new Promise((resolve, reject) => {
-       console.log('Closing server');
-       server.close(err => {
-           if (err) {
-               return reject(err);
-           }
-           resolve();
-       });
-     });
+    return new Promise((resolve, reject) => {
+      console.log('Closing server');
+      server.close(err => {
+        if (err) {
+          return reject(err);
+        }
+        resolve();
+      });
+    });
   });
 }
 
@@ -89,5 +102,8 @@ if (require.main === module) {
   runServer().catch(err => console.error(err));
 };
 
-module.exports = {app, runServer, closeServer};
-
+module.exports = {
+  app,
+  runServer,
+  closeServer
+};
