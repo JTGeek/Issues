@@ -13,41 +13,23 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  name: {
-    firstName: {
-      type: String,
-      default: "Anonymous"
-    },
-    lastName: {
-      type: String,
-      default: "Comic-lover"
-    },
+  firstName: {
+    type: String,
+    default: "Anonymous"
   },
-  catalog: {
-    title: {
-      type: String,
-      required: true
-    },
-    issue: {
-      type: Number,
-      required: true
-    },
-    Publisher: {
-      type: String,
-      required: true
-    },
-    Published: {
-      type: Date
-    }
-  }
+  lastName: {
+    type: String,
+    default: "Comic-lover"
+  },
 });
 
 UserSchema.methods.apiRepr = function () {
   return {
+    id: this._id,
     username: this.username || '',
-    firstName: this.name.firstName || '',
-    lastName: this.name.lastName || '',
-    items: this.catalog.length || ''
+    firstName: this.firstName || '',
+    lastName: this.lastName || ''
+    // items: this.length || ''
   };
 }
 

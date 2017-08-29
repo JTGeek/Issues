@@ -21,6 +21,7 @@
     "passport": "^0.3.2",
     "passport-http": "^0.3.0",
     "passport-jwt": "^2.2.1",
+    "request": "^2.81.0",
     "sillyname": "^0.1.0"
   },
   "devDependencies": {

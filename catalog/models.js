@@ -4,6 +4,10 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const UserCatalogSchema = mongoose.Schema({
+  userid: {
+    type: String,
+    require: true
+  },
   title: {
     type: String,
     required: true
@@ -12,23 +16,15 @@ const UserCatalogSchema = mongoose.Schema({
     type: Number,
     required: true
   },
-  Publisher: {
+  publisher: {
     type: String,
     required: true
   },
-  Published: {
+  published: {
     type: Date
   },
 });
 
-UserCatalogSchema.methods.apiRepr = function () {
-  return {
-    seriesTitle: this.title || '',
-    issueNumber: this.issue || '',
-    publisher: this.publisher || '',
-    published: this.published || ''
-  };
-}
 
 const UserCatalog = mongoose.model('UserCatalog', UserCatalogSchema);
 
