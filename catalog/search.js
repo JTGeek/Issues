@@ -2,7 +2,7 @@ const {
     CV_APIKEY
 } = require('../config');
 const http = require('http');
-const request = require('request');
+const fetchUrl = require("fetch").fetchUrl;
 
 //The url we want is: 'comicvine.gamespot.com/api/characters/?api_key=$APIKEY$&format=json'
 const apiHost = "api.comicvine.com";
@@ -21,28 +21,34 @@ const getData = function (iTitle, iIssue) {
     };
     console.log('options: ', options);
 
-    let callback = function (response) {
-        let str = '';
+    // let callback = function (response) {
+    //     let str = '';
 
-        // another chunk of data has been recieved, so append it to `str`
-        // response.setEncoding('utf8')
-        response.on('data', function (chunk) {
-            str += chunk;
-        });
-        response.on('error', function (error) {
-            console.log("error: " + error);
-        })
-        //the whole response has been recieved, so we just print it out here
-        response.on('end', function () {
-            console.log('hello');
-            console.log(str);
-            return (str);
-        });
+    //     // another chunk of data has been recieved, so append it to `str`
+    //     // response.setEncoding('utf8')
+    //     response.on('data', function (chunk) {
+    //         str += chunk;
+    //     });
+    //     response.on('error', function (error) {
+    //         console.log("error: " + error);
+    //     })
+    //     //the whole response has been recieved, so we just print it out here
+    //     response.on('end', function () {
+    //         console.log('hello');
+    //         console.log(str);
+    //         return (str);
+    //     });
 
-    }
+    // }
 
 
-    http.request(options, callback).end();
+    // http.request(options, callback).end();
+
+
+    let url = 'http://api.comicvine.com/issues/?api_key=811257a1a6ca2c21707f7ad0207533f431883722&format=json&filter=title:hellboy';
+    fetchUrl(url, function (error, meta, body) {
+        return body
+    })
 
     //     request
 

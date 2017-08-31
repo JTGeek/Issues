@@ -4,7 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const passport = require('passport');
-
+// const fetchUrl = require("fetch").fetchUrl;
 const {
   router: usersRouter
 } = require('./users');
@@ -47,6 +47,17 @@ passport.use(jwtStrategy);
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
 app.use('/api/catalog/', catalogRouter);
+
+// app.get('/test', (req, res) => {
+//   console.log("is working");
+//   let url = 'http://api.comicvine.com/issues/?api_key=811257a1a6ca2c21707f7ad0207533f431883722&format=json&filter=title:hellboy';
+//   fetchUrl(url, function (error, meta, body) {
+//     res.send(body)
+//     //res.status(201).json(body);
+//   })
+
+
+// })
 
 // A protected endpoint which needs a valid JWT to access it
 app.get('/api/protected',

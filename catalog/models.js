@@ -23,6 +23,9 @@ const UserCatalogSchema = mongoose.Schema({
   published: {
     type: Date
   },
+  coverUrl: {
+    type: String
+  }
 });
 
 
