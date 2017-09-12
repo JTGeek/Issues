@@ -1,46 +1,74 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js">
-<!--<![endif]-->
+<html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Your Comicbook Shelf</title>
-    <meta name="Your personal collection" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Your 3D Bookshelf</title>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <!-- <link rel="stylesheet" href="css/main.css"> -->
+    <link rel="stylesheet" href="css/style2.css">
+
+
 </head>
 
 <body>
-    <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-
-    <div id="menu"></div>
-
-    <div id="catalogTableDiv">
-        <table id="catalogTable">
-            <tr>
-                <th>Title</th>
-                <th>Issue #</th>
-                <th>Publisher</th>
-                <th>Published</th>
-                <th>Value (coming soon)</th>
-            </tr>
-
-        </table>
+    <div id="banner">
+        <div class='banner text'>Issues</div>
+        <!-- <div id="banner"><img src="../public/images/Comic_Book.jpg" class="image fit"></div> -->
     </div>
+    <div id='main'>
+        <div class="colmask leftmenu">
+            <div class="colleft">
+                <div class="col1">
+                    <!-- Column 1 start -->
+                    <h2 class="left6">Your Current Collection</h2>
+                    <ul id="bookShelf" class="bookshelf"></ul>
+                    <!-- Column 1 end -->
+                </div>
+                <div class="col2">
+                    <!-- Column 2 start -->
+                    <h1>Issues</h1>
+                    <form class="insert">
+                        <input type="text" id="title" value="Batman"><br> Book Title:<br>
+                        <input type="number" id="issue" value="1"><br>Issue #:<br>
+                        <input type="text" id="publisher" value="DC"><br>Publisher Name:<br>
+                        <input type="submit" value="Add New Item">
+                    </form>
+                    <div><button id='logout'>Log Out</button></div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <footer id="footer ">
+            <div class="inner ">
+                <h2>A Thinkful.com Portfolio Project</h2>
+                <p>This site was built to showcase the full-stack capabilities of Thinkful.com student <a href="http://jamestimberlake.tk// ">James Timberlake</a>                    and not for commercial use. Please enjoy and feel free to look under the hood at this <a href='https://github.com/JTGeek/Issues'>repo</a>.
+                    Thank you!</p>
+
+                <ul class="icons ">
+                    <li><a href="https://twitter.com/JamesT1018 " class="icon fa-twitter "><span class="label ">Twitter</span></a></li>
+                    <li><a href="https://www.facebook.com/james.timberlake.161 " class="icon fa-facebook "><span class="label ">Facebook</span></a></li>
+                    <li><a href="linkedin.com/in/jamestimberlake " class="icon fa-linkedin "><span class="label ">LinkedIn</span></a></li>
+                    <li><a href="mailto:James.Timberlake.1018@gmail.com " class="icon fa-envelope "><span class="label ">Email</span></a></li>
+                </ul>
+                <p class="copyright ">&copy; <a href="http://jamestimberlake.tk// ">James Timberlake</a> Images: <a href="https://unsplash.com/ ">Unsplash</a>.
+                    Videos: <a href="http://coverr.co/ ">Coverr</a>.</p>
+            </div>
+        </footer>
 
 
 
 
-    <footer></footer>
 
-    <!-- Scripts -->
-    <script src="assests/js/catalog.js"></script>
+
+
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.scrolly.min.js"></script>
+    <script src="js/jquery.poptrox.min.js"></script>
+    <script src='js/shelf.js'></script>
+
 </body>
 
 </html>

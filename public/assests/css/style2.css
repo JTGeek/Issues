@@ -1,0 +1,455 @@
+#banner {
+	-moz-align-items: center;
+	-webkit-align-items: center;
+	-ms-align-items: center;
+	align-items: center;
+	display: -moz-flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: flex;
+	-moz-justify-content: center;
+	-webkit-justify-content: center;
+	-ms-justify-content: center;
+	justify-content: center;
+	/* padding: 8em 4em 6em 4em; */
+	/* min-height: 70vh; */
+	background-image: url("../images/Comic_Book.jpg");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-top: 0;
+	position: relative;
+	text-align: center;
+	overflow: hidden;
+}
+
+.banner.text {
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', 'Arial', 'sans-serif';
+	font-size: 10vmin;
+	/* margin-left: -20%; */
+	color: white;
+	padding: 20px 0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	/* This removes the border around the viewport in old versions of IE */
+	width: 100%;
+	background: #fff;
+	min-width: 600px;
+	/* Minimum width of layout - remove line if not required */
+	/* The min-width property does not work in old versions of Internet Explorer */
+	font-size: 90%;
+}
+
+a {
+	color: #369;
+}
+
+a:hover {
+	color: #fff;
+	background: #369;
+	text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+	margin: .8em 0 .2em 0;
+	padding: 0;
+}
+
+p {
+	margin: .4em 0 .8em 0;
+	padding: 0;
+}
+
+img {
+	margin: 10px 0 5px;
+}
+
+#ads img {
+	display: block;
+	padding-top: 10px;
+}
+
+
+/* Header styles */
+
+#header {
+	clear: both;
+	float: left;
+	width: 100%;
+}
+
+#header {
+	border-bottom: 1px solid #000;
+}
+
+#header p,
+#header h1,
+#header h2 {
+	padding: .4em 15px 0 15px;
+	margin: 0;
+}
+
+#header ul {
+	clear: left;
+	float: left;
+	width: 100%;
+	list-style: none;
+	margin: 10px 0 0 0;
+	padding: 0;
+}
+
+#header ul li {
+	display: inline;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#header ul li a {
+	display: block;
+	float: left;
+	margin: 0 0 0 1px;
+	padding: 3px 10px;
+	text-align: center;
+	background: #eee;
+	color: #000;
+	text-decoration: none;
+	position: relative;
+	left: 15px;
+	line-height: 1.3em;
+}
+
+#header ul li a:hover {
+	background: #369;
+	color: #fff;
+}
+
+#header ul li a.active,
+#header ul li a.active:hover {
+	color: #fff;
+	background: #000;
+	font-weight: bold;
+}
+
+#header ul li a span {
+	display: block;
+}
+
+
+/* 'widths' sub menu */
+
+#layoutdims {
+	clear: both;
+	background: #eee;
+	border-top: 4px solid #000;
+	margin: 0;
+	padding: 6px 15px !important;
+	text-align: right;
+}
+
+
+/* column container */
+
+.colmask {
+	position: relative;
+	/* This fixes the IE7 overflow hidden bug */
+	clear: both;
+	float: left;
+	width: 100%;
+	/* width of whole page */
+	overflow: hidden;
+	/* This chops off any overhanging divs */
+}
+
+
+/* common column settings */
+
+.colright,
+.colmid,
+.colleft {
+	float: left;
+	width: 100%;
+	position: relative;
+}
+
+.col1,
+.col2,
+.col3 {
+	float: left;
+	position: relative;
+	padding: 0 0 1em 0;
+	overflow: hidden;
+}
+
+.left6 {
+	margin-left: 6%
+}
+
+
+/* 2 Column (left menu) settings */
+
+.leftmenu {
+	background: #fff;
+	/* right column background colour */
+}
+
+.leftmenu .colleft {
+	right: 75%;
+	/* right column width */
+	background: #f4f4f4;
+	/* left column background colour */
+}
+
+.leftmenu .col1 {
+	width: 71%;
+	/* right column content width */
+	left: 102%;
+	/* 100% plus left column left padding */
+	background-image: url("../images/retina_wood_@2X.png");
+}
+
+.leftmenu .col2 {
+	width: 21%;
+	/* left column content width (column width minus left and right padding) */
+	left: 6%;
+	/* (right column left and right padding) plus (left column left padding) */
+}
+
+
+/* Icon */
+
+.icon {
+	text-decoration: none;
+	border-bottom: none;
+	position: relative;
+}
+
+.icon:before {
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	text-transform: none !important;
+}
+
+.icon>.label {
+	display: none;
+}
+
+ul.icons {
+	cursor: default;
+	list-style: none;
+	padding-left: 0;
+}
+
+ul.icons li {
+	display: inline-block;
+	text-align: center;
+	padding-left: 0;
+	padding-right: 1em;
+}
+
+ul.icons li a {
+	display: block;
+	border-radius: 100%;
+	margin: 0;
+	padding: 0.5em;
+	border: solid 1px rgba(144, 144, 144, 0.25);
+	color: rgba(144, 144, 144, 0.25);
+}
+
+ul.icons li a:before {
+	font-size: 1.5em;
+	display: block;
+	width: 1.5em;
+	height: 1.5em;
+	line-height: 1.5em;
+}
+
+ul.icons li a:hover {
+	background-color: #202024;
+	color: #FFF;
+}
+
+ul.icons li:last-child {
+	padding-right: 0;
+}
+
+
+/* Image */
+
+.image {
+	border-radius: 4px;
+	border: 0;
+	display: inline-block;
+	position: relative;
+}
+
+.image img {
+	border-radius: 4px;
+	display: block;
+}
+
+.image.left,
+.image.right {
+	max-width: 40%;
+}
+
+.image.left img,
+.image.right img {
+	width: 100%;
+}
+
+.image.left {
+	float: left;
+	padding: 0 1.5em 1em 0;
+	top: 0.25em;
+}
+
+.image.right {
+	float: right;
+	padding: 0 0 1em 1.5em;
+	top: 0.25em;
+}
+
+.image.fit {
+	display: block;
+	margin: 0 0 2em 0;
+	width: 100%;
+}
+
+.image.fit img {
+	width: 100%;
+	height: 100%;
+}
+
+.image.main {
+	display: block;
+	margin: 0 0 3em 0;
+	width: 100%;
+}
+
+.image.main img {
+	width: 100%;
+}
+
+
+/* Footer styles */
+
+#footer {
+	clear: both;
+	float: left;
+	width: 100%;
+	border-top: 1px solid #000;
+	/* padding: 4em 0 2em 0; */
+	background-color: #1b1b1f;
+	text-align: center;
+}
+
+#footer p {
+	padding: 10px;
+	margin: 0;
+}
+
+#footer .inner {
+	width: 50%;
+	margin: 0 auto;
+}
+
+@media screen and (max-width: 980px) {
+	#footer .inner {
+		width: 75%;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	#footer .inner {
+		width: 90%;
+	}
+}
+
+#footer .copyright {
+	color: rgba(255, 255, 255, 0.5);
+	font-size: 0.9em;
+	margin: 0 0 2em 0;
+	padding: 0;
+	text-align: center;
+}
+
+@media screen and (max-width: 736px) {
+	#footer {
+		padding: 3em 0 1em 0;
+	}
+}
+
+
+/*Bookshelf Bookelement*/
+
+.bookshelf-book {
+	list-style-type: none;
+	float: left;
+	margin: 10px;
+	height: 300px;
+	-webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.5);
+	position: relative;
+	overflow: hidden;
+	-webkit-animation: trans 2s;
+	animation: trans 2s;
+}
+
+.bookshelf-book img {
+	height: 100%;
+}
+
+
+/*Bookshelf Bookelement caption*/
+
+.bookshelf-caption {
+	background-color: #000;
+	color: #fff;
+	opacity: 0.8;
+	filter: alpha(opacity=80);
+	position: absolute;
+	height: 300px;
+	padding: 10px;
+}
+
+.bottom-to-top {
+	top: 100%;
+}
+
+.bookshelf-book:hover .bottom-to-top {
+	top: 0%;
+	transition: all 0.5s ease;
+	-webkit-transition: all 0.5 ease;
+}
+
+
+/*Animation*/
+
+@-webkit-keyframes trans {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes trans {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

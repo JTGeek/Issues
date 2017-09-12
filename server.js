@@ -4,30 +4,35 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const passport = require('passport');
+const indexRouter = require("./server/index");
+const session = require('express-session')
+const path = require('path');
 // const fetchUrl = require("fetch").fetchUrl;
 const {
   router: usersRouter
-} = require('./users');
+} = require('./server/users');
 const {
   router: authRouter,
   basicStrategy,
   jwtStrategy
-} = require('./auth');
+} = require('./server/auth');
 const {
   router: catalogRouter
-} = require('./catalog');
+} = require('./server/catalog');
 
 mongoose.Promise = global.Promise;
 
 const {
   PORT,
   DATABASE_URL
-} = require('./config');
+} = require('./server/config');
 
 const app = express();
-
+app.use(express.static(path.join(__dirname, "/public/assests/")))
 // Logging
 app.use(morgan('common'));
+
+
 
 // CORS
 app.use(function (req, res, next) {
@@ -43,10 +48,39 @@ app.use(function (req, res, next) {
 app.use(passport.initialize());
 passport.use(basicStrategy);
 passport.use(jwtStrategy);
+app.use(session({
+  cookieName: 'siteName',
+  secret: 'b13e3a8d-0f1f-43cf-8c7c-6ec4a970c15c',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    secure: false
+  }
+}));
+app.use('/api/users', usersRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/catalog', catalogRouter);
+app.use('/', indexRouter);
+const fetch = require('node-fetch');
 
-app.use('/api/users/', usersRouter);
-app.use('/api/auth/', authRouter);
-app.use('/api/catalog/', catalogRouter);
+
+app.get('/test', (req, res) => {
+  let url = 'http://api.comicvine.com/issues/?api_key=811257a1a6ca2c21707f7ad0207533f431883722&format=json&filter=title:hellboy';
+  fetch(url)
+    .then(function (result) {
+      return result.json();
+    }).then(function (json) {
+      res.send(json)
+    });
+})
+
+// catch 404 and forward to error handler
+app.use((req, res, next) => {
+  var err = new Error('Not Found');
+  err.status = 404;
+  //next(err);
+  res.sendFile(__dirname + '/public/404.html')
+});
 
 // app.get('/test', (req, res) => {
 //   console.log("is working");
