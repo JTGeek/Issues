@@ -187,7 +187,6 @@ router.post('/login', (req, res) => {
           message: 'Incorrect Username or Password'
         });
       }
-      res.send(result);
     })
     .catch(err => {
       console.log("err", err);

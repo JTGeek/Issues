@@ -16,7 +16,8 @@ $(document).ready(function () {
             success: function (json) {
                 console.log(json);
                 let userId = json.data._id;
-                localStorage.setItem('Issues-user', userId);
+                console.log(userId);
+                localStorage.setItem('issues-user', userId);
                 window.location.href = "/shelf";
             },
             error: function (err) {

@@ -29,7 +29,7 @@ const UserCatalogSchema = mongoose.Schema({
 });
 
 
-const UserCatalog = mongoose.model('UserCatalog', UserCatalogSchema);
+const UserCatalog = mongoose.model('usercatalogs', UserCatalogSchema, "usercatalogs");
 
 module.exports = {
   UserCatalog

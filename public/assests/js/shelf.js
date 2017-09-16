@@ -1,7 +1,6 @@
 $(document).ready(function () {
-    if (!localStorage.getItem("issue-user")) {
-        localStorage.setItem('issues-user', '5997f8208f700651f445a3e5');
-    }
+
+
 
     $(".insert").submit(function (event) {
         event.preventDefault();
@@ -26,49 +25,49 @@ $(document).ready(function () {
 
         })
     });
+    let getUserCatalog = function () {
+        const url = "/api/catalog/" + localStorage.getItem('issues-user');
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: function (json) {
+                console.log(json)
+                if (json && json.length > 0) {
+                    addCatalogItem(json);
 
-    //  $.ajax({
-    //      type: "GET",
-    //      url: '/catalog'
-    //      async: true,
-    //      dataType: "json",
-    //      success: function (json) {
-    //          //filter out json array, for images and embedded subdoc
-    //          // console.log(json);
-    //          var userFN = json._embedded.user;
-    //          var allCatalogItems = json._embedded.title;
-    //          var e = document.getElementById("catalogTableDiv");
-    //          e.innerHTML = "Hello, " + userFN + " you currently have " + catalogItems.length + " issues in your catalog.";
+                    // var userFN = json._embedded.user;
+                    // var allCatalogItems = json._embedded.title;
+                    // var e = document.getElementById("bookShelf");
+                    // e.innerHTML = "Hello, " + userFN + " you currently have " + catalogItems.length + " issues in your catalog.";
 
-    //          console.log(json);
-    //          for (var i = 0; i < allCatalogItems.length; i++) {
-    //              var item = allCatalogItems[i];
-    //              addCatalogItem(item);
-    //          };
-
-    //      },
-    //      error: function (xhr, status, err) {
-    //          console.log(err);
-    //      }
-    //  });
-    let img1 = 'https://graphics8.nytimes.com/images/2012/12/19/books/20favorite-book-covers-slide-ORTM/20favorite-book-covers-slide-ORTM-slide.jpg';
-    let img2 = 'https://graphics8.nytimes.com/images/2012/12/19/books/20favorite-book-covers-slide-DQPY/20favorite-book-covers-slide-DQPY-slide.jpg';
-    let img3 = 'https://graphics8.nytimes.com/images/2012/12/19/books/20favorite-book-covers-slide-QNUF/20favorite-book-covers-slide-QNUF-slide.jpg';
-    let img4 = 'https://graphics8.nytimes.com/images/2012/12/19/books/20favorite-book-covers-slide-U60O/20favorite-book-covers-slide-U60O-slide.jpg';
-    let shelf = '    <div class="shelf"></div>';
+                    // console.log(json);
+                    // for (var i = 0; i < json.length; i++) {
+                    //     var item = json[i];
+                    //     addCatalogItem(item);
+                    // };
+                }
 
 
-    var shelfItem = [img1, img2, img3, img4, img1, img2, img3, img4, img1, img2, img3, img4, img1, img2, img3, img4, img1, img2, img3, img4, img1, img2, img3, img4, img1, img2, img3, img4, img1, img2, img3, img4, img1, img2, img3, img4, img1, img2, img3, img4, img1, img2, img3, img4, img1, img2, img3, img4];
+            },
+            error: function (xhr, status, err) {
+                console.log(err);
+            }
+        });
+    }
+    getUserCatalog();
 
 
+    // XXXXXXXXX
+    function addCatalogItem(shelfItem) {
+        let shelf = '    <div class="shelf"></div>';
 
 
-    //use data from api endpoint after successful test
-    let x = (shelfItem, shelf) => {
-
-
-        for (i = 1; i <= 20; i++) {
-            let template = '<li class="bookshelf-book"> <img src = "' + shelfItem[i - 1] + '" /><div class = "bookshelf-caption bottom-to-top" ><h4> Charlotte au Chocolat </h4><p> Pro solum vivendo id, vim ne consul liberavisse reprehendunt.Nec at quis veri prima.Nam ex quot possim repudiare, an erant graece aperiri sea.Albucius percipitur per ne. </p> <button> Download </button> </div> </li>';
+        for (i = 1; i <= shelfItem.length; i++) {
+            let template = '<li class="bookshelf-book"> <img src = "' + shelfItem[i - 1].imgUrl +
+                '" /><div class = "bookshelf-caption bottom-to-top" ><h4>' + shelfItem[i - 1].title + '</h4><p> ' +
+                shelfItem[i - 1].Discription + ' </p> <button><a href src="' + shelfItem[i - 1].pageUrl +
+                '">Details</a></button> </div> </li>';
             $("#bookShelf").append(template);
             if (i > 0 && i % 5 === 0) {
                 $("#bookShelf").append(shelf);
@@ -77,7 +76,9 @@ $(document).ready(function () {
         // $("#bookShelf").append(shelf);
     };
 
-    x(shelfItem, shelf);
+    // XXXXXXXXXX
+
+
 
 
     $('#logout').click(function (event) {

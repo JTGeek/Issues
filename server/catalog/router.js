@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const getData = require('./search.js')
 const fetch = require('node-fetch');
 const {
   UserCatalog
@@ -14,27 +13,6 @@ const jsonParser = bodyParser.json();
 
 // Post to register a new item in the catalog
 router.post('/additem', jsonParser, (req, res) => {
-  // UserCatalog.find({
-  //   _id: "59b75b1803f4b236d05202a5"
-
-  // }, function (err, result) {
-  //   console.log(err);
-  //   console.log(result);
-
-  // })
-
-  UserCatalog.update({
-    _id: "59b75b1803f4b236d05202a5"
-  }, {
-    $set: {
-      detailURL: "cvurl"
-    }
-  }, function (err, result) {
-    console.log(err);
-    console.log(result);
-    res.status(201).json(result);
-  })
-  return false;
   const requiredFields = ['title', 'issue'];
   const missingField = requiredFields.find(field => !(field in req.body));
 
@@ -68,13 +46,8 @@ router.post('/additem', jsonParser, (req, res) => {
     publisher,
     published
   } = req.body;
-  // Username and password come in pre-trimmed, otherwise we throw an error
-  // before this
-  // console.log(req.body);
-  //username = username.trim();
   title = title.trim();
   publisher = publisher.trim();
-  //published = published.trim();
 
   const arr = [{
     userid: userid,
@@ -88,7 +61,9 @@ router.post('/additem', jsonParser, (req, res) => {
   return UserCatalog
     .find({
       userid: userid,
-      title: title
+      title: title,
+      issue: issue,
+      publisher: publisher
     })
     .then(update => {
       console.log(update);
@@ -101,7 +76,7 @@ router.post('/additem', jsonParser, (req, res) => {
           .then(results => {
             let _id = results[0]["_id"];
             console.log(results)
-            let url = 'http://api.comicvine.com/issues/?api_key=811257a1a6ca2c21707f7ad0207533f431883722&format=json&filter=title:hellboy';
+            let url = 'http://api.comicvine.com/issues/?api_key=811257a1a6ca2c21707f7ad0207533f431883722&format=json&filter=title:' + title + '&filter=issue:' + issue + '&filter=publisher:' + publisher;
             fetch(url)
               .then(function (result) {
                 return result.json();
@@ -109,21 +84,27 @@ router.post('/additem', jsonParser, (req, res) => {
                 //console.log(json);
                 if (json && json.results.length > 0) {
                   console.log("test", _id)
-                  let cvURL = json.results[0].api_detail_url;
-                  var ObjectId = require('mongodb').ObjectId;
-                  var o_id = new ObjectId(_id);
-                  UserCatalog.update({
-                    _id: o_id
+                  let cvURL = json.results[0].site_detail_url;
+                  let cvImgURL = json.results[0].image.medium_url;
+                  let cvDisc = json.results[0].description || 'No Discription for this issue yet';
+
+
+                  UserCatalog.findOneAndUpdate({
+                    _id: _id
                   }, {
                     $set: {
-                      detailURL: cvURL
-                    }
-                  }, function (err, result) {
-                    console.log(err);
-                    console.log(result);
-                    res.status(201).json(result);
-                  })
+                      pageUrl: cvURL,
+                      imgUrl: cvImgURL,
+                      Discription: cvDisc
 
+                    }
+                  }, {
+                    new: true
+                  }, function (err, r) {
+                    console.log(err);
+                    console.log(r);
+                    res.status(201).json(r);
+                  })
                 }
 
               });
@@ -132,7 +113,7 @@ router.post('/additem', jsonParser, (req, res) => {
         return res.status(400).json({
 
           code: 400,
-          message: 'User already in collection'
+          message: 'Update Failed'
         })
 
       }
@@ -156,24 +137,25 @@ router.post('/additem', jsonParser, (req, res) => {
 
 router.get('/:userID', (req, res) => {
   let userID = req.params.userID;
+  console.log(userID);
   UserCatalog
     .find({
       userid: userID
     })
     .then(catalog => {
 
-      // for (var i = 0; j = catalog.length, i < j; i++) {
-      //   // console.log('catalog.title: ', catalog[i].title);
-      //   // console.log('catalog.issue: ', catalog[i].issue);
-      //   var iTitle = catalog[i].title;
-      //   var iIssue = catalog[i].issue;
-      //   console.log('iTitle: ', iTitle);
-      //   console.log('iIssue: ', iIssue);
-      getData();
+      for (var i = 0; j = catalog.length, i < j; i++) {
+        // console.log('catalog.title: ', catalog[i].title);
+        // console.log('catalog.issue: ', catalog[i].issue);
+        var iTitle = catalog[i].title;
+        var iIssue = catalog[i].issue;
+
+        console.log('iTitle: ', iTitle);
+        console.log('iIssue: ', iIssue);
 
 
-      // }
-      // console.log('results: ', results);
+      }
+      console.log('results: ', catalog);
       return res.status(201).json(catalog);
     })
 
