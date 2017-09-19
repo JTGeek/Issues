@@ -141,6 +141,12 @@ img {
 	display: block;
 }
 
+#logout {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+
 
 /* 'widths' sub menu */
 
@@ -202,12 +208,12 @@ img {
 .leftmenu .colleft {
 	right: 75%;
 	/* right column width */
-	background: #f4f4f4;
+	/* background: #f4f4f4; */
 	/* left column background colour */
 }
 
 .leftmenu .col1 {
-	width: 71%;
+	width: 75%;
 	/* right column content width */
 	left: 102%;
 	/* 100% plus left column left padding */
@@ -215,10 +221,9 @@ img {
 }
 
 .leftmenu .col2 {
-	width: 21%;
+	width: 25%;
 	/* left column content width (column width minus left and right padding) */
-	left: 6%;
-	/* (right column left and right padding) plus (left column left padding) */
+	left: 10px;
 }
 
 
@@ -271,6 +276,8 @@ ul.icons li a:before {
 	width: 1.5em;
 	height: 1.5em;
 	line-height: 1.5em;
+	background: #202024;
+	border-radius: 100%;
 }
 
 ul.icons li a:hover {
@@ -349,7 +356,7 @@ ul.icons li:last-child {
 	width: 100%;
 	border-top: 1px solid #000;
 	/* padding: 4em 0 2em 0; */
-	background-color: #1b1b1f;
+	background-color: navajowhite;
 	text-align: center;
 }
 
@@ -413,6 +420,10 @@ ul.icons li:last-child {
 
 /*Bookshelf Bookelement caption*/
 
+.bookshelf {
+	margin-right: 2%;
+}
+
 .bookshelf-caption {
 	background-color: #000;
 	color: #fff;
@@ -421,6 +432,7 @@ ul.icons li:last-child {
 	position: absolute;
 	height: 300px;
 	padding: 10px;
+	overflow: scroll;
 }
 
 .bottom-to-top {

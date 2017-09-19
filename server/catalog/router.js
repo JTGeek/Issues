@@ -66,43 +66,49 @@ router.post('/additem', jsonParser, (req, res) => {
       publisher: publisher
     })
     .then(update => {
-      console.log(update);
+      // console.log(update);
       if (update && update.length == 0) {
         UserCatalog.insertMany(arr)
           .then(function (docs) {
-            console.log('docs')
+            // console.log('docs')
             return docs;
           })
           .then(results => {
             let _id = results[0]["_id"];
-            console.log(results)
-            let url = 'http://api.comicvine.com/issues/?api_key=811257a1a6ca2c21707f7ad0207533f431883722&format=json&filter=title:' + title + '&filter=issue:' + issue + '&filter=publisher:' + publisher;
+            // console.log(results)
+            let url = 'http://api.comicvine.com/issues/?api_key=811257a1a6ca2c21707f7ad0207533f431883722&format=json&filter=name:' +
+              title + ',issue:' + issue + 'publisher:' + publisher;
+            console.log(url);
             fetch(url)
               .then(function (result) {
                 return result.json();
               }).then(function (json) {
-                //console.log(json);
+
+
+
+
                 if (json && json.results.length > 0) {
+                  // console.log(json);
                   console.log("test", _id)
                   let cvURL = json.results[0].site_detail_url;
                   let cvImgURL = json.results[0].image.medium_url;
                   let cvDisc = json.results[0].description || 'No Discription for this issue yet';
+                  let temp = {
+                    pageUrl: cvURL,
+                    imgUrl: cvImgURL,
+                    description: cvDisc
 
-
+                  }
+                  console.log("temp:", temp);
                   UserCatalog.findOneAndUpdate({
                     _id: _id
                   }, {
-                    $set: {
-                      pageUrl: cvURL,
-                      imgUrl: cvImgURL,
-                      Discription: cvDisc
-
-                    }
+                    $set: temp
                   }, {
                     new: true
                   }, function (err, r) {
                     console.log(err);
-                    console.log(r);
+                    // console.log(r);
                     res.status(201).json(r);
                   })
                 }
@@ -123,7 +129,7 @@ router.post('/additem', jsonParser, (req, res) => {
     .catch(err => {
       // Forward validation errors on to the client, otherwise give a 500
       // error because something unexpected has happened
-      console.log(err);
+      // console.log(err);
       if (err.reason === 'ValidationError') {
         return res.status(err.code).json(err);
       }
@@ -137,7 +143,7 @@ router.post('/additem', jsonParser, (req, res) => {
 
 router.get('/:userID', (req, res) => {
   let userID = req.params.userID;
-  console.log(userID);
+  // console.log(userID);
   UserCatalog
     .find({
       userid: userID
@@ -150,12 +156,12 @@ router.get('/:userID', (req, res) => {
         var iTitle = catalog[i].title;
         var iIssue = catalog[i].issue;
 
-        console.log('iTitle: ', iTitle);
-        console.log('iIssue: ', iIssue);
+        // console.log('iTitle: ', iTitle);
+        // console.log('iIssue: ', iIssue);
 
 
       }
-      console.log('results: ', catalog);
+      // console.log('results: ', catalog);
       return res.status(201).json(catalog);
     })
 

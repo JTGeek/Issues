@@ -20,10 +20,13 @@ const UserCatalogSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  published: {
-    type: Date
+  imgUrl: {
+    type: String
   },
-  coverUrl: {
+  description: {
+    type: String
+  },
+  pageUrl: {
     type: String
   }
 });

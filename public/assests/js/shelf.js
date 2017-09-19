@@ -18,6 +18,8 @@ $(document).ready(function () {
             dataType: "json",
             success: function (json) {
                 console.log(json)
+                getUserCatalog();
+
             },
             error: function (err) {
                 console.log(err)
@@ -50,7 +52,7 @@ $(document).ready(function () {
 
 
             },
-            error: function (xhr, status, err) {
+            error: function (err) {
                 console.log(err);
             }
         });
@@ -60,14 +62,17 @@ $(document).ready(function () {
 
     // XXXXXXXXX
     function addCatalogItem(shelfItem) {
+
+        $("#bookShelf").html('');
         let shelf = '    <div class="shelf"></div>';
 
 
-        for (i = 1; i <= shelfItem.length; i++) {
-            let template = '<li class="bookshelf-book"> <img src = "' + shelfItem[i - 1].imgUrl +
-                '" /><div class = "bookshelf-caption bottom-to-top" ><h4>' + shelfItem[i - 1].title + '</h4><p> ' +
-                shelfItem[i - 1].Discription + ' </p> <button><a href src="' + shelfItem[i - 1].pageUrl +
-                '">Details</a></button> </div> </li>';
+        for (i = 0; i < shelfItem.length; i++) {
+            let template = '<li class="bookshelf-book"> <img src = "' + shelfItem[i].imgUrl +
+                '" /><div class = "bookshelf-caption bottom-to-top" ><h4>' + shelfItem[i].title + '</h4><p> ' +
+                shelfItem[i].description + ' </p> <button><a href="' + shelfItem[i].pageUrl +
+                '" target="_blank">Details</a></button></div> </li>';
+            console.log(template);
             $("#bookShelf").append(template);
             if (i > 0 && i % 5 === 0) {
                 $("#bookShelf").append(shelf);
@@ -98,3 +103,4 @@ $(document).ready(function () {
     })
 
 });
+console.log('test');
