@@ -1,0 +1,11 @@
+Front-End: 
+Use Ajax, with exposed API key. Pull info from db, via app api.
+    Pros: Quicker to write/deploy
+    Cons: No security, API_Key is exposed
+
+Back-End:
+Create Endpoint for userID to send userID from local storage (client side).
+Use ID to pull collection info from db, which can then be used to looped throught the CV api.
+API Json results returned to client-side and used to append table.
+    Pros: Secure, all keys, etc hidden in backend.
+    Cons: More to write, longer to deploy, additonal possible breakdown points.

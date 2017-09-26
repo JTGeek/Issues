@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Your 3D Bookshelf</title>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="css/style2.css">
+
+
+</head>
+
+<body>
+    <div id="banner">
+        <div class='banner text'>Issues</div>
+        <div><button id='logout'>Log Out</button></div>
+        <!-- <div id="banner"><img src="../public/images/Comic_Book.jpg" class="image fit"></div> -->
+    </div>
+    <div id='main'>
+        <div class="colmask leftmenu">
+            <div class="colleft">
+                <div class="col1">
+                    <!-- Column 1 start -->
+                    <h2 class="left6">Your Current Collection</h2>
+                    <ul id="bookShelf" class="bookshelf"></ul>
+                    <!-- Column 1 end -->
+                </div>
+                <div class="col2">
+                    <!-- Column 2 start -->
+                    <h1>Add an item:</h1>
+                    <form class="insert">
+                        <p>Book Title:</p> <input type="text" id="title" value="Batman">
+                        <p>Issue #:</p><input type="number" id="issue" value="1">
+                        <p>Publisher Name:</p><input type="text" id="publisher" value="DC"><br>
+                        <input type="submit" value="Add New Item">
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer id='footer'>
+        <div class='inner'>
+            <h2>A Thinkful.com Portfolio Project</h2>
+            <p>This site was built to showcase the full-stack capabilities of Thinkful.com student <a href="http://jamestimberlake.co ">James Timberlake</a>                and not for commercial use. This code is no longer maintained, but please enjoy and feel free to look under
+                the hood at this <a href='https://github.com/JTGeek/Issues'>repo</a>. Thank you!</p>
+
+            <ul class="icons ">
+                <li><a href="https://twitter.com/JamesT1018 " class="icon fa-twitter "><span class="label ">Twitter</span></a></li>
+                <li><a href="https://www.facebook.com/james.timberlake.161 " class="icon fa-facebook "><span class="label ">Facebook</span></a></li>
+                <li><a href="linkedin.com/in/jamestimberlake " class="icon fa-linkedin "><span class="label ">LinkedIn</span></a></li>
+                <li><a href="mailto:contact@jamestimberlake.co " class="icon fa-envelope "><span class="label ">Email</span></a></li>
+            </ul>
+            <p class="copyright ">&copy; <a href="http://jamestimberlake.co ">James Timberlake</a> Images: <a href="https://unsplash.com/ ">Unsplash</a>.
+                Videos: <a href="http://coverr.co/ ">Coverr</a>.</p>
+        </div>
+    </footer>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.scrolly.min.js"></script>
+    <script src="js/jquery.poptrox.min.js"></script>
+    <script src='js/shelf.js'></script>
+
+</body>
+
+</html>
